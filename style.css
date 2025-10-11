@@ -3,14 +3,14 @@ body {
   font-family: Arial, sans-serif; /* jenis huruf yang bersih dan mudah dibaca */
   color: #191970; /* warna teks utama (biru gelap) */
 }
-.kartu-profil {
-  width: 300px;
-  margin: 20px auto; /* 50px jarak atas/bawah, auto menengahkan kiri/kanan */
-  pading: 60px;
+.kartu-profil 
+{ width: 300px;
+  margin: 50px auto; /* 50px jarak atas/bawah, auto menengahkan 
+ kiri/kanan */
+  pading: 20px;
   background-color: white;
-  border-radius: 37px; /* membuat sudut melengkung */
-  box shadow: 0 4px 8px rgba (0,0,0,0,.1( /* efek bayangan */
-}
+  border-radius: 17px; /* membuat sudut melengkung */
+  box shadow: 0 4px 8px rgba (0,0,0,0,.1) /* efek bayangan */ }
 
 .kartu-profil img {
   width: 20px;
