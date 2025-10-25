@@ -29,7 +29,6 @@
         }
         
         /* Persiapan untuk Animasi Scroll */
-        /* Elemen akan transparan dan sedikit bergeser */
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
@@ -56,7 +55,6 @@
 
     <!-- 
       HEADER & NAVIGASI 
-      Navigasi yang intuitif, minimalis, dan responsif.
     -->
     <header class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
@@ -65,7 +63,7 @@
                 Amaranggana Group
             </a>
 
-            <!-- Navigasi Desktop (Disembunyikan di mobile) -->
+            <!-- Navigasi Desktop -->
             <div class="hidden md:flex space-x-8">
                 <a href="#beranda" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300">Beranda</a>
                 <a href="#tentang" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300">Tentang</a>
@@ -173,7 +171,7 @@
 
         <!-- 
           BAGIAN 3: LAYANAN (SERVICES)
-          Tambahkan fitur Analisis Kebutuhan Jasa (Gemini AI)
+          Tambahkan fitur Analisis Kebutuhan Jasa (OpenAI)
         -->
         <section id="layanan" class="py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -216,8 +214,8 @@
 
                 <!-- NEW FEATURE: Strategic Analysis -->
                 <div class="mt-20 max-w-4xl mx-auto p-8 bg-white rounded-xl shadow-2xl border border-indigo-100 animate-on-scroll" style="transition-delay: 500ms;">
-                    <h3 class="text-2xl font-bold text-indigo-700 mb-4 text-center">✨ Analisis Kebutuhan Jasa (Gemini AI)</h3>
-                    <p class="text-gray-600 mb-6 text-center">Masukkan tantangan bisnis atau proyek Anda secara singkat, dan Gemini AI akan menganalisis layanan Amaranggana Group mana yang paling sesuai.</p>
+                    <h3 class="text-2xl font-bold text-indigo-700 mb-4 text-center">✨ Analisis Kebutuhan Jasa (Didukung OpenAI)</h3>
+                    <p class="text-gray-600 mb-6 text-center">Masukkan tantangan bisnis atau proyek Anda secara singkat, dan AI akan menganalisis layanan Amaranggana Group mana yang paling sesuai.</p>
                     <div class="space-y-4">
                         <textarea id="challenge-input" rows="3" placeholder="Contoh: Kami kesulitan mengintegrasikan sistem warisan kami dengan platform pembayaran modern." class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900">Kami ingin meningkatkan efisiensi dan mengurangi kesalahan dalam proses verifikasi identitas nasabah baru.</textarea>
                         <button id="analyze-challenge" class="w-full bg-indigo-500 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-indigo-600 transition duration-300 flex items-center justify-center">
@@ -232,7 +230,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- 
           BAGIAN 4: PORTOFOLIO / STUDI KASUS
         -->
@@ -243,7 +241,7 @@
                         Karya yang Berbicara
                     </h2>
                     <p class="mt-4 text-lg text-gray-600 animate-on-scroll" style="transition-delay: 100ms;">
-                        Kami bangga telah bekerja sama dengan berbagai klien, dari *startup* hingga korporasi besar, untuk mewujudkan visi mereka.
+                        Kami bangga telah bekerja sama dengan various klien, dari *startup* hingga korporasi besar, untuk mewujudkan visi mereka.
                     </p>
                 </div>
 
@@ -282,7 +280,7 @@
 
         <!-- 
           BAGIAN 5: BLOG / ARTIKEL
-          Tambahkan fitur Ide Konten Blog (Gemini AI)
+          Tambahkan fitur Ide Konten Blog (OpenAI)
         -->
         <section id="blog" class="py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -297,11 +295,11 @@
                 
                 <!-- NEW FEATURE: Blog Content Idea Generator -->
                 <div class="mt-10 max-w-2xl mx-auto p-6 bg-indigo-50 rounded-xl shadow-inner animate-on-scroll" style="transition-delay: 150ms;">
-                    <h3 class="text-xl font-bold text-indigo-800 mb-4">✨ Ide Konten Blog (Didukung Gemini AI)</h3>
+                    <h3 class="text-xl font-bold text-indigo-800 mb-4">✨ Ide Konten Blog (Didukung OpenAI)</h3>
                     <p class="text-gray-700 mb-4 text-sm">Ingin inspirasi konten blog terbaru? Masukkan satu topik umum (misal: "Keamanan data perbankan") dan biarkan AI kami menyarankan ide-ide judul yang menarik dan relevan.</p>
                     <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
                         <input type="text" id="blog-topic-input" placeholder="Masukkan topik blog..." class="flex-grow px-4 py-2 border border-indigo-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900" value="Regulasi OJK untuk Fintech">
-                        <button id="generate-blog-ideas" class="flex-shrink-0 bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 flex items-center justify-center" disabled>
+                        <button id="generate-blog-ideas" class="flex-shrink-0 bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 flex items-center justify-center">
                             <span id="blog-button-text">Jana Ide</span>
                             <svg id="blog-spinner" class="animate-spin h-5 w-5 text-white ml-2 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                         </button>
@@ -457,66 +455,105 @@
     </footer>
 
     <script>
-        // --- Gemini API Setup ---
-        const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent";
-        const API_KEY = "AIzaSyAk3YbfKl4mV7Ic6bpNZlC5NSQxm-bpDsQ"; // Canvas will provide this automatically
+        // =================================================================
+        // --- OpenAI API Setup ---
+        // PENTING: GANTI DENGAN KUNCI API OPENAI SAH ANDA
+        const API_URL = "https://api.openai.com/v1/chat/completions";
+        // <<< GANTI DENGAN KUNCI API OPENAI SAH ANDA DI SINI >>>
+        const API_KEY = "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"; 
+        // PERINGATAN! Jika Anda terus mendapat error 429, periksa status Kunci API ini 
+        // di dasbor OpenAI (saldo, batas rate, dan validitas kunci).
+        const MODEL_NAME = "gpt-3.5-turbo";
+        // =================================================================
+
 
         /**
-         * Utility function to fetch content from the Gemini API with exponential backoff.
+         * Utility function to fetch content from the OpenAI API with aggressive exponential backoff.
+         * Telah ditingkatkan ketahanannya terhadap error 429 (Too Many Requests).
          * @param {string} userQuery - The user's prompt.
-         * @param {boolean} useGrounding - Whether to enable Google Search grounding.
-         * @param {object} generationConfig - Configuration for structured output (optional).
-         * @returns {Promise<string>} The generated text content.
+         * @param {string} systemPrompt - The system instruction/persona.
+         * @param {boolean} isStructured - Whether to request JSON output.
+         * @returns {Promise<string>} The generated text content (either plain text or JSON string).
          */
-        async function fetchGeminiText({ userQuery, systemPrompt, useGrounding = false, generationConfig = {} }) {
-            const maxRetries = 3;
+        async function fetchOpenAIText({ userQuery, systemPrompt, isStructured = false }) {
+            const maxRetries = 4; 
+            
+            // --- Memastikan Kunci API tidak kosong ---
+            if (!API_KEY || API_KEY.trim() === "") {
+                console.error("Kunci API OpenAI kosong. Fitur AI tidak akan berfungsi.");
+                throw new Error("Kesalahan Konfigurasi: Harap masukkan Kunci API OpenAI yang valid.");
+            }
+            // -----------------------------------------------------------
+
             for (let i = 0; i < maxRetries; i++) {
                 try {
+                    
                     const payload = {
-                        contents: [{ parts: [{ text: userQuery }] }],
-                        systemInstruction: { parts: [{ text: systemPrompt }] },
-                        generationConfig: generationConfig
+                        model: MODEL_NAME,
+                        messages: [
+                            { role: "system", content: systemPrompt },
+                            { role: "user", content: userQuery }
+                        ]
                     };
-
-                    if (useGrounding) {
-                        payload.tools = [{ "google_search": {} }];
+                    
+                    // Konfigurasi untuk JSON Output (OpenAI)
+                    if (isStructured) {
+                        payload.response_format = { type: "json_object" };
                     }
                     
-                    const response = await fetch(`${API_URL}?key=${API_KEY}`, {
+                    const response = await fetch(API_URL, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            // Menggunakan Authorization Header untuk OpenAI
+                            'Authorization': `Bearer ${API_KEY}`
+                        },
                         body: JSON.stringify(payload)
                     });
 
                     if (response.status === 429) {
+                        // Jika bukan percobaan terakhir, tunggu dan coba lagi
                         if (i < maxRetries - 1) {
-                            const delay = Math.pow(2, i) * 1000;
+                            // Exponential backoff: 3s, 4.5s, 6.75s, 10.1s
+                            const delay = 3000 * Math.pow(1.5, i);
+                            const delaySeconds = (delay / 1000).toFixed(2);
+                            console.warn(`[API] Rate limit hit (429). Retrying in ${delaySeconds} seconds...`);
                             await new Promise(resolve => setTimeout(resolve, delay));
                             continue; // Retry
                         } else {
-                            throw new Error("Too many requests. Please try again later.");
+                            // Jika ini percobaan terakhir, lempar error
+                            throw new Error("Terlalu banyak permintaan (429). Silakan coba lagi nanti.");
                         }
                     }
 
                     if (!response.ok) {
                         const errorBody = await response.json();
-                        throw new Error(errorBody.error?.message || `API Error: ${response.statusText}`);
+                        // Menangani kesalahan autentikasi (401)
+                        if (response.status === 401) {
+                             throw new Error("Kesalahan Otentikasi (401). Kunci API Anda mungkin tidak valid atau tidak memiliki izin.");
+                        }
+                        throw new Error(errorBody.error?.message || `Kesalahan API: ${response.statusText}`);
                     }
 
                     const result = await response.json();
-                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                    const text = result.choices?.[0]?.message?.content;
 
                     if (!text) {
-                        throw new Error("Response structure invalid or content blocked.");
+                        throw new Error("Struktur respons tidak valid atau konten diblokir.");
                     }
 
                     return text;
 
                 } catch (error) {
-                    // Log the error but continue if retries are available
-                    console.error("Gemini API call failed:", error.message);
+                    console.error("OpenAI API call failed:", error.message);
                     if (i === maxRetries - 1) {
+                        // Jika ini adalah loop terakhir, lempar error untuk ditangani oleh caller function
                         throw error;
+                    }
+                    // Untuk error non-429 sementara, tunggu 1s, 2s, 3s
+                    if (i < maxRetries - 1) {
+                         const delay = 1000 * (i + 1);
+                         await new Promise(resolve => setTimeout(resolve, delay));
                     }
                 }
             }
@@ -524,7 +561,7 @@
         
         document.addEventListener('DOMContentLoaded', function() {
             
-            // --- Fungsionalitas Menu Mobile & Navigasi Aktif (Existing Logic) ---
+            // --- Fungsionalitas Menu Mobile & Navigasi Aktif (Logic LAMA) ---
             const menuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const sections = document.querySelectorAll('section[id]');
@@ -566,15 +603,9 @@
             });
 
 
-            // --- Fungsionalitas Animasi Saat Menggulir (Existing Logic) ---
+            // --- Fungsionalitas Animasi Saat Menggulir (Logic LAMA) ---
             const animatedElements = document.querySelectorAll('.animate-on-scroll');
             
-            const observerOptions = {
-                root: null, 
-                rootMargin: '0px',
-                threshold: 0.1 
-            };
-
             const animationObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -582,13 +613,13 @@
                         observer.unobserve(entry.target); 
                     }
                 });
-            }, observerOptions);
+            }, { root: null, rootMargin: '0px', threshold: 0.1 });
 
             animatedElements.forEach(el => {
                 animationObserver.observe(el);
             });
 
-            // --- Fungsionalitas Animasi Umpan Balik Formulir (Existing Logic) ---
+            // --- Fungsionalitas Animasi Umpan Balik Formulir (Logic LAMA) ---
             const contactForm = document.getElementById('contact-form');
             const successMessage = document.getElementById('form-success-message');
             
@@ -601,11 +632,11 @@
                 }, 5000);
             });
 
-            // --- Update Tahun Copyright (Existing Logic) ---
+            // --- Update Tahun Copyright (Logic LAMA) ---
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
             // =================================================================
-            // --- NEW GEMINI AI FEATURE 1: Blog Content Idea Generator ---
+            // --- OpenAI FEATURE 1: Blog Content Idea Generator ---
             // =================================================================
             const blogInput = document.getElementById('blog-topic-input');
             const generateButton = document.getElementById('generate-blog-ideas');
@@ -633,36 +664,44 @@
                 generateButton.setAttribute('disabled', 'true');
                 blogButtonText.textContent = 'Memproses...';
                 blogSpinner.classList.remove('hidden');
-                blogResults.innerHTML = `<div class="p-4 text-center text-indigo-500">Mencari tren terbaru...</div>`;
+                blogResults.innerHTML = `<div class="p-4 text-center text-indigo-500">Menganalisis dan membuat ide konten...</div>`;
                 
                 try {
                     const systemPrompt = "Anda adalah seorang ahli strategi konten dan SEO di bidang teknologi dan keuangan (Fintech). Tugas Anda adalah menghasilkan 3 ide judul blog yang sangat menarik dan relevan berdasarkan topik yang diberikan. Sertakan deskripsi singkat (maksimal 20 kata) untuk setiap ide. Format output Anda sebagai daftar berurutan dalam bahasa Indonesia.";
                     const userQuery = `Buatkan 3 ide konten blog yang menarik untuk topik: "${topic}". Pastikan ide-ide ini relevan dengan tren pasar saat ini.`;
                     
-                    const rawText = await fetchGeminiText({ 
+                    const rawText = await fetchOpenAIText({ 
                         userQuery: userQuery, 
-                        systemPrompt: systemPrompt,
-                        useGrounding: true // Use Google Search for current trends
+                        systemPrompt: systemPrompt
+                        // isStructured: false (default)
                     });
 
                     // Parse and display results
                     const htmlContent = rawText
                         .split('\n')
                         .map(line => {
-                            if (line.match(/^\d+\./)) { // Start of a new idea (e.g., "1. Judul...")
-                                const [num, ...rest] = line.split('. ');
-                                const title = rest.join('. ');
+                            // Mencari baris yang dimulai dengan angka dan titik (misal: "1. Judul...")
+                            const match = line.match(/^(\d+)\.\s*(.*)/);
+                            if (match) { 
+                                const num = match[1];
+                                const fullTitleDesc = match[2];
+                                
+                                // Mencoba memisahkan judul dan deskripsi jika ada titik dua
+                                const parts = fullTitleDesc.split(':');
+                                const title = parts[0].trim();
+                                const description = parts.length > 1 ? parts.slice(1).join(':').trim() : "Deskripsi singkat tidak tersedia.";
+
                                 return `<div class="p-4 bg-white rounded-lg border-l-4 border-indigo-500 shadow-md">
                                             <h5 class="font-bold text-gray-900">${num}. ${title}</h5>
-                                            <p class="mt-1 text-sm text-gray-600">${rawText.split(line)[1].trim().split('\n')[0]}</p>
+                                            <p class="mt-1 text-sm text-gray-600">${description}</p>
                                         </div>`;
                             }
-                            return ''; // Ignore non-list lines (like empty lines)
+                            return ''; // Abaikan baris non-daftar
                         })
                         .filter(html => html.length > 0)
                         .join('');
 
-                    blogResults.innerHTML = htmlContent || `<div class="p-4 text-center text-red-500">Maaf, gagal menghasilkan ide konten. Coba topik lain.</div>`;
+                    blogResults.innerHTML = htmlContent || `<div class="p-4 text-center text-red-500">Maaf, gagal menghasilkan ide konten. Coba topik lain atau periksa Kunci API Anda.</div>`;
 
                 } catch (error) {
                     console.error("Error generating blog ideas:", error);
@@ -677,7 +716,7 @@
 
 
             // =================================================================
-            // --- NEW GEMINI AI FEATURE 2: Strategic Challenge Analysis ---
+            // --- OpenAI FEATURE 2: Strategic Challenge Analysis ---
             // =================================================================
             const challengeInput = document.getElementById('challenge-input');
             const analyzeButton = document.getElementById('analyze-challenge');
@@ -710,30 +749,13 @@
                 analysisContent.innerHTML = `<div class="p-4 text-center text-indigo-500">AI sedang memproses tantangan bisnis Anda...</div>`;
 
                 try {
-                    const systemPrompt = "Anda adalah Analis Strategis Utama untuk Amaranggana Group, sebuah perusahaan Teknologi dan Keuangan. Tugas Anda adalah menganalisis tantangan bisnis yang diberikan oleh klien dan merekomendasikan satu layanan inti Amaranggana Group yang paling relevan. Layanan inti adalah: Pengembangan Fintech, Keamanan Siber & Kepatuhan, dan Konsultasi Strategi Digital. Anda harus memberikan output JSON yang ringkas. Gunakan bahasa Indonesia.";
+                    const systemPrompt = "Anda adalah Analis Strategis Utama untuk Amaranggana Group, sebuah perusahaan Teknologi dan Keuangan. Tugas Anda adalah menganalisis tantangan bisnis yang diberikan oleh klien dan merekomendasikan satu layanan inti Amaranggana Group yang paling relevan. Layanan inti adalah: Pengembangan Fintech, Keamanan Siber & Kepatuhan, dan Konsultasi Strategi Digital. Anda harus memberikan output JSON yang ringkas dan valid, mematuhi skema yang diberikan. Gunakan bahasa Indonesia.";
                     const userQuery = `Analisis tantangan bisnis berikut dan rekomendasikan layanan Amaranggana Group yang paling cocok:\n\nTantangan: ${challenge}`;
                     
-                    const jsonSchema = {
-                        type: "OBJECT",
-                        properties: {
-                            "recommendation": { "type": "STRING", description: "Nama layanan inti yang paling direkomendasikan." },
-                            "justification": { "type": "STRING", description: "Penjelasan singkat (maksimal 3 kalimat) mengapa layanan ini direkomendasikan untuk tantangan tersebut." },
-                            "suggested_actions": {
-                                "type": "ARRAY",
-                                "description": "Daftar 3 langkah spesifik yang dapat dilakukan klien untuk memulai solusi ini.",
-                                "items": { "type": "STRING" }
-                            }
-                        },
-                        "propertyOrdering": ["recommendation", "justification", "suggested_actions"]
-                    };
-
-                    const rawJsonText = await fetchGeminiText({ 
+                    const rawJsonText = await fetchOpenAIText({ 
                         userQuery: userQuery, 
                         systemPrompt: systemPrompt,
-                        generationConfig: {
-                            responseMimeType: "application/json",
-                            responseSchema: jsonSchema
-                        }
+                        isStructured: true // Meminta output JSON
                     });
 
                     const result = JSON.parse(rawJsonText);
@@ -749,13 +771,13 @@
                     }
 
                     // Render the results
-                    const actionsHtml = result.suggested_actions.map(action => 
+                    const actionsHtml = (result.suggested_actions || []).map(action => 
                         `<li class="flex items-start"><svg class="w-5 h-5 mr-2 text-indigo-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>${action}</li>`
                     ).join('');
 
                     analysisContent.innerHTML = `
-                        <p class="mb-3 text-lg font-bold text-indigo-600">Layanan Rekomendasi: ${result.recommendation}</p>
-                        <p class="text-gray-700 mb-4">${result.justification}</p>
+                        <p class="mb-3 text-lg font-bold text-indigo-600">Layanan Rekomendasi: ${result.recommendation || 'Tidak Teridentifikasi'}</p>
+                        <p class="text-gray-700 mb-4">${result.justification || 'Penjelasan tidak tersedia.'}</p>
                         <h5 class="font-semibold text-gray-800 mb-2">Langkah Aksi yang Disarankan:</h5>
                         <ul class="space-y-2 text-gray-600 list-none pl-0">${actionsHtml}</ul>
                     `;
@@ -763,7 +785,7 @@
 
                 } catch (error) {
                     console.error("Error analyzing challenge:", error);
-                    analysisContent.innerHTML = `<div class="p-4 text-center text-red-500">Terjadi kesalahan dalam analisis: ${error.message}. Pastikan format tantangan sudah benar.</div>`;
+                    analysisContent.innerHTML = `<div class="p-4 text-center text-red-500">Terjadi kesalahan dalam analisis: ${error.message}. Harap periksa Kunci API OpenAI Anda.</div>`;
                 } finally {
                     // UI Reset State
                     analyzeButton.removeAttribute('disabled');
