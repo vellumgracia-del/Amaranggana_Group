@@ -6,11 +6,30 @@
     <title>Amaranggana Group - Inovasi Teknologi & Keuangan</title>
     <meta name="description" content="Amaranggana Group - Mendorong inovasi di bidang teknologi dan keuangan melalui solusi strategis dan pengembangan perangkat lunak terdepan.">
     
-    <!-- Memuat Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Memuat Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Konfigurasi Font Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Konfigurasi Warna Kustom Tailwind --><script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'prussian': '#003153', // Biru Prusia (Gelap, Dominan)
+                        'pacific': {
+                            50: '#E6F8FB',
+                            100: '#BFEFF7',
+                            500: '#1CA9C9', // Biru Pasifik (Terang, Aksen)
+                            600: '#158C9F',
+                            700: '#0F6B76',
+                            800: '#0A4A50',
+                        },
+                        'neutral-light': '#F5F9FA', // Warna latar belakang terang pengganti white/gray-50
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Konfigurasi Font Inter --><link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -20,11 +39,12 @@
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; /* Mencegah overflow horizontal */
         }
 
         /* Kelas untuk Navigasi Aktif */
         .nav-active {
-            color: #4f46e5; /* indigo-600 */
+            color: #1CA9C9; /* Pacific Blue */
             font-weight: 600;
         }
         
@@ -49,82 +69,179 @@
                 transform: none;
             }
         }
+
+        /* ======================================= */
+        /* START: Landing Screen Specific Styles */
+        /* ======================================= */
+        #landing-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #003153; /* Prussian Blue */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Pastikan di atas semua elemen */
+            transition: opacity 1s ease-out, visibility 1s ease-out;
+            color: white;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #landing-screen.hidden-screen {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .animated-logo-container {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            animation: pulsate 2s infinite ease-in-out;
+            transform: scale(1);
+        }
+        
+        .animated-logo-container svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Keyframes untuk animasi denyut */
+        @keyframes pulsate {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.9; }
+        }
+
+        /* Animasi garis yang bergerak */
+        .logo-line {
+            stroke-dasharray: 200;
+            stroke-dashoffset: 0;
+            animation: drawLine 4s infinite linear;
+        }
+
+        @keyframes drawLine {
+            0% {
+                stroke-dashoffset: 200;
+                transform: rotate(0deg);
+            }
+            50% {
+                stroke-dashoffset: 0;
+                transform: rotate(180deg);
+            }
+            100% {
+                stroke-dashoffset: -200;
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Animasi teks 'Loading...' */
+        .loading-text {
+            font-size: 1.25rem; /* text-xl */
+            margin-top: 1.5rem; /* mt-6 */
+            animation: fadeInOut 2s infinite ease-in-out;
+            color: #BFEFF7; /* pacific-100 */
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* ======================================= */
+        /* END: Landing Screen Specific Styles */
+        /* ======================================= */
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-neutral-light text-gray-800">
+    <!-- 
+      LANDING SCREEN DENGAN ANIMASI
+    --><div id="landing-screen" class="flex flex-col items-center justify-center">
+        <div class="animated-logo-container">
+            <!-- Contoh logo abstrak perpaduan teknologi dan keuangan --><!-- Lingkaran luar (melambangkan stabilitas/data flow) --><!-- Garis bergerigi/sirkuit (teknologi) --><!-- Panah ke atas (pertumbuhan keuangan) --><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Lingkaran luar - Prussian Blue --><circle cx="50" cy="50" r="45" stroke="#0A4A50" stroke-width="2" />
+                
+                <!-- Garis spiral/data flow yang bergerak - Pacific Blue 500 --><path class="logo-line" 
+                      d="M50 5 C75 5 95 25 95 50 C95 75 75 95 50 95 C25 95 5 75 5 50 C5 25 25 5 50 5" 
+                      stroke="#1CA9C9" stroke-width="3" fill="none" transform-origin="50 50">
+                    <animateTransform 
+                        attributeName="transform"
+                        attributeType="XML"
+                        type="rotate"
+                        from="0 50 50"
+                        to="360 50 50"
+                        dur="10s"
+                        repeatCount="indefinite"/>
+                </path>
+
+                <!-- Icon di tengah: Segitiga ke atas (pertumbuhan) di dalam sebuah chip/gear --><g transform="translate(35, 35)" fill="#BFEFF7"> <!-- Pacific Blue 100 --><!-- Bentuk dasar chip/gear --><rect x="5" y="5" width="20" height="20" rx="3" fill="#003153"/> <!-- Prussian Blue --><circle cx="15" cy="15" r="8" fill="#1CA9C9"/> <!-- Pacific Blue 500 --><!-- Segitiga pertumbuhan --><path d="M15 10 L20 20 L10 20 Z" fill="#E6F8FB"/> <!-- Pacific Blue 50 --></g>
+            </svg>
+        </div>
+        <p class="loading-text">Memuat pengalaman inovasi...</p>
+    </div>
 
     <!-- 
       HEADER & NAVIGASI 
-    -->
-    <header class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+    --><header class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
-            <!-- Logo / Nama Perusahaan -->
-            <a href="#beranda" class="text-2xl font-bold text-indigo-600">
+            <!-- Logo / Nama Perusahaan --><a href="#beranda" class="text-2xl font-bold text-pacific-500">
                 Amaranggana Group
             </a>
 
-            <!-- Navigasi Desktop -->
-            <div class="hidden md:flex space-x-8">
-                <a href="#beranda" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300">Beranda</a>
-                <a href="#tentang" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300">Tentang</a>
-                <a href="#layanan" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300">Layanan</a>
-                <a href="#portofolio" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300">Portofolio</a>
-                <a href="#blog" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300">Blog</a>
-                <a href="#kontak" class="nav-link text-gray-600 hover:text-indigo-600 transition duration-300">Kontak</a>
+            <!-- Navigasi Desktop --><div class="hidden md:flex space-x-8">
+                <a href="#beranda" class="nav-link text-gray-600 hover:text-pacific-500 transition duration-300">Beranda</a>
+                <a href="#tentang" class="nav-link text-gray-600 hover:text-pacific-500 transition duration-300">Tentang</a>
+                <a href="#layanan" class="nav-link text-gray-600 hover:text-pacific-500 transition duration-300">Layanan</a>
+                <a href="#portofolio" class="nav-link text-gray-600 hover:text-pacific-500 transition duration-300">Portofolio</a>
+                <a href="#blog" class="nav-link text-gray-600 hover:text-pacific-500 transition duration-300">Blog</a>
+                <a href="#kontak" class="nav-link text-gray-600 hover:text-pacific-500 transition duration-300">Kontak</a>
             </div>
 
-            <!-- Tombol Menu Mobile (Hamburger) -->
-            <div class="md:hidden">
-                <button id="mobile-menu-button" aria-label="Buka menu navigasi" class="text-gray-700 hover:text-indigo-600 p-2 rounded-md">
+            <!-- Tombol Menu Mobile (Hamburger) --><div class="md:hidden">
+                <button id="mobile-menu-button" aria-label="Buka menu navigasi" class="text-gray-700 hover:text-pacific-500 p-2 rounded-md">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </nav>
 
-        <!-- Menu Mobile (Dropdown) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute top-16 left-0 right-0 z-40">
-            <a href="#beranda" class="block px-6 py-3 text-gray-700 hover:bg-indigo-50">Beranda</a>
-            <a href="#tentang" class="block px-6 py-3 text-gray-700 hover:bg-indigo-50">Tentang</a>
-            <a href="#layanan" class="block px-6 py-3 text-gray-700 hover:bg-indigo-50">Layanan</a>
-            <a href="#portofolio" class="block px-6 py-3 text-gray-700 hover:bg-indigo-50">Portofolio</a>
-            <a href="#blog" class="block px-6 py-3 text-gray-700 hover:bg-indigo-50">Blog</a>
-            <a href="#kontak" class="block px-6 py-3 text-gray-700 hover:bg-indigo-50">Kontak</a>
+        <!-- Menu Mobile (Dropdown) --><div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute top-16 left-0 right-0 z-40">
+            <a href="#beranda" class="block px-6 py-3 text-gray-700 hover:bg-pacific-50">Beranda</a>
+            <a href="#tentang" class="block px-6 py-3 text-gray-700 hover:bg-pacific-50">Tentang</a>
+            <a href="#layanan" class="block px-6 py-3 text-gray-700 hover:bg-pacific-50">Layanan</a>
+            <a href="#portofolio" class="block px-6 py-3 text-gray-700 hover:bg-pacific-50">Portofolio</a>
+            <a href="#blog" class="block px-6 py-3 text-gray-700 hover:bg-pacific-50">Blog</a>
+            <a href="#kontak" class="block px-6 py-3 text-gray-700 hover:bg-pacific-50">Kontak</a>
         </div>
     </header>
 
-    <!-- Konten Utama -->
-    <main>
+    <!-- Konten Utama --><main>
 
         <!-- 
           BAGIAN 1: BERANDA (HOMEPAGE)
-        -->
-        <section id="beranda" class="min-h-[calc(100vh-64px)] flex items-center bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8 items-center py-20">
-                <!-- Kolom Teks -->
-                <div class="animate-on-scroll">
-                    <span class="text-indigo-600 font-semibold">TEKNOLOGI & KEUANGAN</span>
+        --><section id="beranda" class="min-h-[calc(100vh-64px)] flex items-center bg-neutral-light"> <!-- Background diubah --><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8 items-center py-20">
+                <!-- Kolom Teks --><div class="animate-on-scroll">
+                    <span class="text-pacific-500 font-semibold">TEKNOLOGI & KEUANGAN</span>
                     <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mt-2 mb-6 leading-tight">
                         Mendorong Inovasi Masa Depan
                     </h1>
                     <p class="text-lg text-gray-600 mb-8">
                         Amaranggana Group adalah mitra strategis Anda dalam mentransformasi tantangan kompleks menjadi peluang digital dan finansial yang bernilai tinggi.
                     </p>
-                    <a href="#kontak" class="inline-block bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-indigo-700 hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
+                    <a href="#kontak" class="inline-block bg-pacific-500 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-pacific-600 hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
                         Mulai Proyek Anda
                     </a>
                 </div>
-                <!-- Kolom Visual/Gambar -->
-                <div class="animate-on-scroll" style="transition-delay: 200ms;">
-                    <img src="https://placehold.co/600x450/6366F1/FFFFFF?text=Amaranggana+Group" alt="Ilustrasi Inovasi Teknologi dan Keuangan" class="rounded-lg shadow-2xl w-full h-auto object-cover">
+                <!-- Kolom Visual/Gambar --><div class="animate-on-scroll" style="transition-delay: 200ms;">
+                    <!-- Gambar Placeholder dengan warna yang sesuai --><img src="https://placehold.co/600x450/003153/1CA9C9?text=Amaranggana+Group" alt="Ilustrasi Inovasi Teknologi dan Keuangan" class="rounded-lg shadow-2xl w-full h-auto object-cover">
                 </div>
             </div>
         </section>
 
         <!-- 
           BAGIAN 2: TENTANG KAMI
-        -->
-        <section id="tentang" class="py-24 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        --><section id="tentang" class="py-24 bg-white"> <!-- Background diubah --><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto">
                     <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 animate-on-scroll">
                         Kekuatan di Balik Visi Anda
@@ -134,16 +251,14 @@
                     </p>
                 </div>
 
-                <!-- Misi & Visi -->
-                <div class="mt-16 grid md:grid-cols-2 gap-12 items-center">
+                <!-- Misi & Visi --><div class="mt-16 grid md:grid-cols-2 gap-12 items-center">
                     <div class="animate-on-scroll" style="transition-delay: 200ms;">
-                        <img src="https://placehold.co/500x350/E0E7FF/4F46E5?text=Tim+Kami" alt="Tim Amaranggana Group" class="rounded-lg shadow-xl w-full">
+                        <!-- Gambar Placeholder dengan warna yang sesuai --><img src="https://placehold.co/500x350/1CA9C9/003153?text=Tim+Kami" alt="Tim Amaranggana Group" class="rounded-lg shadow-xl w-full">
                     </div>
                     <div class="space-y-8 animate-on-scroll" style="transition-delay: 300ms;">
-                        <!-- Item Misi -->
-                        <div class="flex items-start space-x-4">
+                        <!-- Item Misi --><div class="flex items-start space-x-4">
                             <div class="flex-shrink-0">
-                                <span class="flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100 text-indigo-600">
+                                <span class="flex items-center justify-center h-12 w-12 rounded-full bg-pacific-100 text-pacific-500">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
                                 </span>
                             </div>
@@ -152,10 +267,9 @@
                                 <p class="mt-1 text-gray-600">Memberikan solusi teknologi dan keuangan yang inovatif, aman, dan terukur untuk mendorong pertumbuhan bisnis klien kami secara berkelanjutan.</p>
                             </div>
                         </div>
-                        <!-- Item Visi -->
-                        <div class="flex items-start space-x-4">
+                        <!-- Item Visi --><div class="flex items-start space-x-4">
                             <div class="flex-shrink-0">
-                                <span class="flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100 text-indigo-600">
+                                <span class="flex items-center justify-center h-12 w-12 rounded-full bg-pacific-100 text-pacific-500">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                                 </span>
                             </div>
@@ -171,10 +285,7 @@
 
         <!-- 
           BAGIAN 3: LAYANAN (SERVICES)
-          Tambahkan fitur Analisis Kebutuhan Jasa (OpenAI)
-        -->
-        <section id="layanan" class="py-24 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        --><section id="layanan" class="py-24 bg-neutral-light"> <!-- Background diubah --><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto">
                     <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 animate-on-scroll">
                         Solusi Komprehensif
@@ -184,27 +295,20 @@
                     </p>
                 </div>
 
-                <!-- Grid Layanan -->
-                <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Kartu Layanan 1: Teknologi -->
-                    <div id="layanan-fintech" class="bg-gray-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 animate-on-scroll" style="transition-delay: 200ms;">
-                        <span class="inline-block p-3 rounded-full bg-indigo-100 text-indigo-600">
+                <!-- Grid Layanan --><div class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Kartu Layanan 1: Teknologi --><div id="layanan-fintech" class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 animate-on-scroll" style="transition-delay: 200ms;"> <!-- Background diubah --><span class="inline-block p-3 rounded-full bg-pacific-100 text-pacific-500">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                         </span>
                         <h3 class="mt-6 text-2xl font-bold">Pengembangan Fintech</h3>
                         <p class="mt-3 text-gray-600">Membangun platform *payment gateway*, P2P lending, dan aplikasi *wealth management* yang aman dan *scalable*.</p>
                     </div>
-                    <!-- Kartu Layanan 2: Keamanan -->
-                    <div id="layanan-keamanan" class="bg-gray-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 animate-on-scroll" style="transition-delay: 300ms;">
-                        <span class="inline-block p-3 rounded-full bg-indigo-100 text-indigo-600">
+                    <!-- Kartu Layanan 2: Keamanan --><div id="layanan-keamanan" class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 animate-on-scroll" style="transition-delay: 300ms;"> <!-- Background diubah --><span class="inline-block p-3 rounded-full bg-pacific-100 text-pacific-500">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                         </span>
                         <h3 class="mt-6 text-2xl font-bold">Keamanan Siber & Kepatuhan</h3>
                         <p class="mt-3 text-gray-600">Audit keamanan, implementasi standar ISO, dan kepatuhan regulasi OJK/BI untuk melindungi aset digital Anda.</p>
                     </div>
-                    <!-- Kartu Layanan 3: Konsultasi -->
-                    <div id="layanan-konsultasi" class="bg-gray-50 p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 animate-on-scroll" style="transition-delay: 400ms;">
-                        <span class="inline-block p-3 rounded-full bg-indigo-100 text-indigo-600">
+                    <!-- Kartu Layanan 3: Konsultasi --><div id="layanan-konsultasi" class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 animate-on-scroll" style="transition-delay: 400ms;"> <!-- Background diubah --><span class="inline-block p-3 rounded-full bg-pacific-100 text-pacific-500">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
                         </span>
                         <h3 class="mt-6 text-2xl font-bold">Konsultasi Strategi Digital</h3>
@@ -212,66 +316,77 @@
                     </div>
                 </div>
 
-                <!-- NEW FEATURE: Strategic Analysis -->
-                <div class="mt-20 max-w-4xl mx-auto p-8 bg-white rounded-xl shadow-2xl border border-indigo-100 animate-on-scroll" style="transition-delay: 500ms;">
-                    <h3 class="text-2xl font-bold text-indigo-700 mb-4 text-center">✨ Analisis Kebutuhan Jasa (Didukung OpenAI)</h3>
+                <!-- FEATURE: Fintech Terminology Explainer (TEXT ONLY) --><div class="mt-16 max-w-4xl mx-auto p-8 bg-pacific-50 rounded-xl shadow-inner border border-pacific-100 animate-on-scroll" style="transition-delay: 400ms;">
+                    <h3 class="text-2xl font-bold text-pacific-700 mb-4 text-center">✨ Kamus Istilah Fintech (Didukung Gemini AI)</h3>
+                    <p class="text-gray-600 mb-6 text-center">Bingung dengan jargon industri? Masukkan istilah (misal: "KYC" atau "AML") dan dapatkan penjelasan singkat secara instan.</p>
+                    <div class="space-y-4">
+                        <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
+                            <input type="text" id="term-input" placeholder="Masukkan istilah Fintech..." class="flex-grow px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pacific-500 focus:border-pacific-500 text-gray-900" value="Regtech">
+                            <button id="explain-term-button" class="flex-shrink-0 bg-pacific-500 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-pacific-600 transition duration-300 flex items-center justify-center">
+                                <span id="explain-button-text">Jelaskan Istilah</span>
+                                <svg id="explain-spinner" class="animate-spin h-5 w-5 text-white ml-2 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                            </button>
+                        </div>
+                        <div id="term-results" class="mt-4 p-4 border border-pacific-500 rounded-lg bg-white shadow-inner hidden">
+                            <h4 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+                                <svg class="w-6 h-6 mr-2 text-pacific-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5c-4.418 0-8 2.75-8 7s3.582 7 8 7c1.746 0 3.332-.477 4.5-1.253m0-13C13.168 5.477 14.754 5 16.5 5c4.418 0 8 2.75 8 7s-3.582 7-8 7c-1.746 0-3.332-.477-4.5-1.253"></path></svg>
+                                Penjelasan Istilah:
+                            </h4>
+                            <p id="term-explanation" class="text-gray-700"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FEATURE: Strategic Analysis --><div class="mt-20 max-w-4xl mx-auto p-8 bg-white rounded-xl shadow-2xl border border-pacific-100 animate-on-scroll" style="transition-delay: 500ms;">
+                    <h3 class="text-2xl font-bold text-pacific-700 mb-4 text-center">✨ Analisis Kebutuhan Jasa (Didukung Gemini AI)</h3>
                     <p class="text-gray-600 mb-6 text-center">Masukkan tantangan bisnis atau proyek Anda secara singkat, dan AI akan menganalisis layanan Amaranggana Group mana yang paling sesuai.</p>
                     <div class="space-y-4">
-                        <textarea id="challenge-input" rows="3" placeholder="Contoh: Kami kesulitan mengintegrasikan sistem warisan kami dengan platform pembayaran modern." class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900">Kami ingin meningkatkan efisiensi dan mengurangi kesalahan dalam proses verifikasi identitas nasabah baru.</textarea>
-                        <button id="analyze-challenge" class="w-full bg-indigo-500 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-indigo-600 transition duration-300 flex items-center justify-center">
+                        <textarea id="challenge-input" rows="3" placeholder="Contoh: Kami kesulitan mengintegrasikan sistem warisan kami dengan platform pembayaran modern." class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pacific-500 focus:border-pacific-500 text-gray-900">Kami ingin meningkatkan efisiensi dan mengurangi kesalahan dalam proses verifikasi identitas nasabah baru.</textarea>
+                        <button id="analyze-challenge" class="w-full bg-pacific-500 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-pacific-600 transition duration-300 flex items-center justify-center">
                             <span id="analysis-button-text">Analisis Tantangan</span>
                             <svg id="analysis-spinner" class="animate-spin h-5 w-5 text-white ml-2 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                         </button>
                     </div>
-                    <div id="analysis-results" class="mt-6 p-4 border border-indigo-300 rounded-lg bg-white shadow-inner hidden">
+                    <div id="analysis-results" class="mt-6 p-4 border border-pacific-500 rounded-lg bg-white shadow-inner hidden">
                         <h4 class="text-lg font-bold text-gray-800 mb-3">Rekomendasi Strategis AI:</h4>
                         <div id="analysis-content"></div>
                     </div>
                 </div>
             </div>
         </section>
-
+        
         <!-- 
           BAGIAN 4: PORTOFOLIO / STUDI KASUS
-        -->
-        <section id="portofolio" class="py-24 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        --><section id="portofolio" class="py-24 bg-white"> <!-- Background diubah --><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto">
                     <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 animate-on-scroll">
                         Karya yang Berbicara
                     </h2>
                     <p class="mt-4 text-lg text-gray-600 animate-on-scroll" style="transition-delay: 100ms;">
-                        Kami bangga telah bekerja sama dengan various klien, dari *startup* hingga korporasi besar, untuk mewujudkan visi mereka.
+                        Kami bangga telah bekerja sama dengan berbagai klien, dari *startup* hingga korporasi besar, untuk mewujudkan visi mereka.
                     </p>
                 </div>
 
-                <!-- Grid Portofolio -->
-                <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Item Portofolio 1 -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-all duration-300 animate-on-scroll" style="transition-delay: 200ms;">
-                        <img src="https://placehold.co/400x300/312E81/FFFFFF?text=Proyek+Fintech" alt="Studi Kasus Proyek Fintech" class="w-full h-56 object-cover group-hover:opacity-90 transition-opacity duration-300">
+                <!-- Grid Portofolio --><div class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Item Portofolio 1 --><div class="bg-neutral-light rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-all duration-300 animate-on-scroll" style="transition-delay: 200ms;"> <!-- Background diubah --><!-- Gambar Placeholder dengan warna yang sesuai --><img src="https://placehold.co/400x300/003153/1CA9C9?text=Proyek+Fintech" alt="Studi Kasus Proyek Fintech" class="w-full h-56 object-cover group-hover:opacity-90 transition-opacity duration-300">
                         <div class="p-6">
-                            <span class="text-sm text-indigo-600 font-semibold">FINTECH</span>
+                            <span class="text-sm text-pacific-500 font-semibold">FINTECH</span>
                             <h3 class="mt-2 text-xl font-bold">Platform P2P Lending Inovatif</h3>
                             <p class="mt-2 text-gray-600">Studi kasus pengembangan platform P2P lending yang berhasil mendanai 10.000+ UMKM.</p>
                         </div>
                     </div>
-                    <!-- Item Portofolio 2 -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-all duration-300 animate-on-scroll" style="transition-delay: 300ms;">
-                        <img src="https://placehold.co/400x300/0F766E/FFFFFF?text=Proyek+Keamanan" alt="Studi Kasus Proyek Keamanan" class="w-full h-56 object-cover group-hover:opacity-90 transition-opacity duration-300">
+                    <!-- Item Portofolio 2 --><div class="bg-neutral-light rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-all duration-300 animate-on-scroll" style="transition-delay: 300ms;"> <!-- Background diubah --><!-- Gambar Placeholder dengan warna yang sesuai --><img src="https://placehold.co/400x300/1CA9C9/003153?text=Proyek+Keamanan" alt="Studi Kasus Proyek Keamanan" class="w-full h-56 object-cover group-hover:opacity-90 transition-opacity duration-300">
                         <div class="p-6">
-                            <span class="text-sm text-teal-600 font-semibold">CYBER SECURITY</span>
+                            <span class="text-sm text-pacific-500 font-semibold">CYBER SECURITY</span>
                             <h3 class="mt-2 text-xl font-bold">Audit Keamanan Bank Digital</h3>
                             <p class="mt-2 text-gray-600">Mengidentifikasi dan memperbaiki 50+ kerentanan kritis pada sistem perbankan digital ternama.</p>
                         </div>
                     </div>
-                    <!-- Item Portofolio 3 -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-all duration-300 animate-on-scroll" style="transition-delay: 400ms;">
-                        <img src="https://placehold.co/400x300/BE123C/FFFFFF?text=Proyek+Data" alt="Studi Kasus Proyek Data" class="w-full h-56 object-cover group-hover:opacity-90 transition-opacity duration-300">
+                    <!-- Item Portofolio 3 --><div class="bg-neutral-light rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-all duration-300 animate-on-scroll" style="transition-delay: 400ms;"> <!-- Background diubah --><!-- Gambar Placeholder dengan warna yang sesuai --><img src="https://placehold.co/400x300/003153/1CA9C9?text=Proyek+Data" alt="Studi Kasus Proyek Data" class="w-full h-56 object-cover group-hover:opacity-90 transition-opacity duration-300">
                         <div class="p-6">
-                            <span class="text-sm text-rose-600 font-semibold">DATA SCIENCE</span>
+                            <span class="text-sm text-pacific-500 font-semibold">DATA SCIENCE</span>
                             <h3 class="mt-2 text-xl font-bold">Model Prediksi Kredit Macet</h3>
-                            <p class="mt-2 text-gray-600">Implementasi *machine learning* untuk mengurangi rasio NPL (Non-Performing Loan) sebesar 25%.</p>
+                            <p class="mt-3 text-gray-600">Implementasi *machine learning* untuk mengurangi rasio NPL (Non-Performing Loan) sebesar 25%.</p>
                         </div>
                     </div>
                 </div>
@@ -280,10 +395,7 @@
 
         <!-- 
           BAGIAN 5: BLOG / ARTIKEL
-          Tambahkan fitur Ide Konten Blog (OpenAI)
-        -->
-        <section id="blog" class="py-24 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        --><section id="blog" class="py-24 bg-neutral-light"> <!-- Background diubah --><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto">
                     <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 animate-on-scroll">
                         Wawasan Terbaru
@@ -293,49 +405,40 @@
                     </p>
                 </div>
                 
-                <!-- NEW FEATURE: Blog Content Idea Generator -->
-                <div class="mt-10 max-w-2xl mx-auto p-6 bg-indigo-50 rounded-xl shadow-inner animate-on-scroll" style="transition-delay: 150ms;">
-                    <h3 class="text-xl font-bold text-indigo-800 mb-4">✨ Ide Konten Blog (Didukung OpenAI)</h3>
+                <!-- FEATURE: Blog Content Idea Generator --><div class="mt-10 max-w-2xl mx-auto p-6 bg-pacific-50 rounded-xl shadow-inner animate-on-scroll" style="transition-delay: 150ms;">
+                    <h3 class="text-xl font-bold text-pacific-700 mb-4">✨ Ide Konten Blog (Didukung Gemini AI)</h3>
                     <p class="text-gray-700 mb-4 text-sm">Ingin inspirasi konten blog terbaru? Masukkan satu topik umum (misal: "Keamanan data perbankan") dan biarkan AI kami menyarankan ide-ide judul yang menarik dan relevan.</p>
                     <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
-                        <input type="text" id="blog-topic-input" placeholder="Masukkan topik blog..." class="flex-grow px-4 py-2 border border-indigo-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900" value="Regulasi OJK untuk Fintech">
-                        <button id="generate-blog-ideas" class="flex-shrink-0 bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 flex items-center justify-center">
+                        <input type="text" id="blog-topic-input" placeholder="Masukkan topik blog..." class="flex-grow px-4 py-2 border border-pacific-500 rounded-lg shadow-sm focus:ring-pacific-500 focus:border-pacific-500 text-gray-900" value="Regulasi OJK untuk Fintech">
+                        <button id="generate-blog-ideas" class="flex-shrink-0 bg-pacific-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-pacific-700 transition duration-300 flex items-center justify-center">
                             <span id="blog-button-text">Jana Ide</span>
                             <svg id="blog-spinner" class="animate-spin h-5 w-5 text-white ml-2 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                         </button>
                     </div>
                     <div id="blog-results" class="mt-5 space-y-4">
-                        <!-- Hasil akan muncul di sini -->
-                    </div>
+                        <!-- Hasil akan muncul di sini --></div>
                 </div>
 
-                <!-- Grid Artikel -->
-                <div class="mt-16 grid md:grid-cols-3 gap-8">
-                    <!-- Artikel 1 -->
-                    <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow duration-300 animate-on-scroll" style="transition-delay: 200ms;">
-                        <img src="https://placehold.co/400x250/F3F4F6/1F2937?text=Tren+AI" alt="Artikel Tren AI" class="w-full h-48 object-cover">
+                <!-- Grid Artikel --><div class="mt-16 grid md:grid-cols-3 gap-8">
+                    <!-- Artikel 1 --><div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow duration-300 animate-on-scroll" style="transition-delay: 200ms;"> <!-- Background diubah --><img src="https://placehold.co/400x250/F5F9FA/003153?text=Tren+AI" alt="Artikel Tren AI" class="w-full h-48 object-cover">
                         <div class="p-6">
                             <span class="text-sm text-gray-500">24 Oktober 2025</span>
                             <h3 class="mt-2 text-xl font-bold">Masa Depan AI dalam Analisis Risiko Keuangan</h3>
-                            <a href="#" class="mt-4 inline-block text-indigo-600 font-semibold hover:text-indigo-800 transition duration-300">Baca Selengkapnya &rarr;</a>
+                            <a href="#" class="mt-4 inline-block text-pacific-500 font-semibold hover:text-pacific-700 transition duration-300">Baca Selengkapnya &rarr;</a>
                         </div>
                     </div>
-                    <!-- Artikel 2 -->
-                    <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow duration-300 animate-on-scroll" style="transition-delay: 300ms;">
-                        <img src="https://placehold.co/400x250/F3F4F6/1F2937?text=Blockchain" alt="Artikel Blockchain" class="w-full h-48 object-cover">
+                    <!-- Artikel 2 --><div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow duration-300 animate-on-scroll" style="transition-delay: 300ms;"> <!-- Background diubah --><img src="https://placehold.co/400x250/F5F9FA/003153?text=Blockchain" alt="Artikel Blockchain" class="w-full h-48 object-cover">
                         <div class="p-6">
                             <span class="text-sm text-gray-500">22 Oktober 2025</span>
                             <h3 class="mt-2 text-xl font-bold">Blockchain: Lebih dari Sekedar Aset Kripto</h3>
-                            <a href="#" class="mt-4 inline-block text-indigo-600 font-semibold hover:text-indigo-800 transition duration-300">Baca Selengkapnya &rarr;</a>
+                            <a href="#" class="mt-4 inline-block text-pacific-500 font-semibold hover:text-pacific-700 transition duration-300">Baca Selengkapnya &rarr;</a>
                         </div>
                     </div>
-                    <!-- Artikel 3 -->
-                    <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow duration-300 animate-on-scroll" style="transition-delay: 400ms;">
-                        <img src="https://placehold.co/400x250/F3F4F6/1F2937?text=Regulasi" alt="Artikel Regulasi" class="w-full h-48 object-cover">
+                    <!-- Artikel 3 --><div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow duration-300 animate-on-scroll" style="transition-delay: 400ms;"> <!-- Background diubah --><img src="https://placehold.co/400x250/F5F9FA/003153?text=Regulasi" alt="Artikel Regulasi" class="w-full h-48 object-cover">
                         <div class="p-6">
                             <span class="text-sm text-gray-500">20 Oktober 2025</span>
                             <h3 class="mt-2 text-xl font-bold">Menavigasi Regulasi Fintech Baru di Indonesia</h3>
-                            <a href="#" class="mt-4 inline-block text-indigo-600 font-semibold hover:text-indigo-800 transition duration-300">Baca Selengkapnya &rarr;</a>
+                            <a href="#" class="mt-4 inline-block text-pacific-500 font-semibold hover:text-pacific-700 transition duration-300">Baca Selengkapnya &rarr;</a>
                         </div>
                     </div>
                 </div>
@@ -344,57 +447,53 @@
 
         <!-- 
           BAGIAN 6: KONTAK
-        -->
-        <section id="kontak" class="py-24 bg-indigo-700 text-white">
+        --><section id="kontak" class="py-24 bg-prussian text-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <!-- Info Kontak -->
-                    <div class="animate-on-scroll">
+                    <!-- Info Kontak --><div class="animate-on-scroll">
                         <h2 class="text-3xl md:text-4xl font-extrabold">
                             Mari Wujudkan Ide Anda
                         </h2>
-                        <p class="mt-4 text-lg text-indigo-100">
+                        <p class="mt-4 text-lg text-pacific-100">
                             Kami siap membantu Anda. Isi formulir di samping atau hubungi kami melalui informasi di bawah ini untuk memulai konsultasi gratis.
                         </p>
                         <div class="mt-8 space-y-6">
                             <p class="flex items-center text-lg">
-                                <svg class="w-6 h-6 mr-3 text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                <svg class="w-6 h-6 mr-3 text-pacific-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                                 halo@amaranggana.group
                             </p>
                             <p class="flex items-center text-lg">
-                                <svg class="w-6 h-6 mr-3 text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                <svg class="w-6 h-6 mr-3 text-pacific-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                                 +62 21 1234 5678
                             </p>
                             <p class="flex items-start text-lg">
-                                <svg class="w-6 h-6 mr-3 text-indigo-200 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                <svg class="w-6 h-6 mr-3 text-pacific-100 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                                 <span>Gedung Bursa Efek Indonesia, Tower 2<br>Jl. Jend. Sudirman Kav. 52-53, Jakarta Selatan</span>
                             </p>
                         </div>
                     </div>
 
-                    <!-- Formulir Kontak -->
-                    <div class="bg-white p-8 rounded-lg shadow-2xl animate-on-scroll" style="transition-delay: 200ms;">
+                    <!-- Formulir Kontak --><div class="bg-white p-8 rounded-lg shadow-2xl animate-on-scroll" style="transition-delay: 200ms;">
                         <form id="contact-form" class="space-y-6">
                             <div>
                                 <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-                                <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900">
+                                <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-pacific-500 focus:border-pacific-500 text-gray-900">
                             </div>
                             <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                                <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900">
+                                <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-pacific-500 focus:border-pacific-500 text-gray-900">
                             </div>
                             <div>
                                 <label for="message" class="block text-sm font-medium text-gray-700">Pesan Anda</label>
-                                <textarea id="message" name="message" rows="5" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"></textarea>
+                                <textarea id="message" name="message" rows="5" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-pacific-500 focus:border-pacific-500 text-gray-900"></textarea>
                             </div>
                             <div>
-                                <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-indigo-700 hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
+                                <button type="submit" class="w-full bg-pacific-500 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-pacific-600 hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
                                     Kirim Pesan
                                 </button>
                             </div>
                         </form>
-                        <!-- Animasi Umpan Balik (Micro-interaction) -->
-                        <div id="form-success-message" class="hidden mt-6 p-4 rounded-md bg-green-100 text-green-700">
+                        <!-- Animasi Umpan Balik (Micro-interaction) --><div id="form-success-message" class="hidden mt-6 p-4 rounded-md bg-green-100 text-green-700">
                             Terima kasih! Pesan Anda telah terkirim. Kami akan segera menghubungi Anda.
                         </div>
                     </div>
@@ -406,17 +505,14 @@
 
     <!-- 
       FOOTER
-    -->
-    <footer class="bg-gray-900 text-gray-400 py-16">
+    --><footer class="bg-prussian text-gray-400 py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-4 gap-8">
-                <!-- Kolom 1: Tentang -->
-                <div>
+                <!-- Kolom 1: Tentang --><div>
                     <h3 class="text-xl font-bold text-white mb-4">Amaranggana Group</h3>
                     <p class="text-sm">Inovasi terdepan di bidang teknologi dan keuangan untuk masa depan yang lebih baik.</p>
                 </div>
-                <!-- Kolom 2: Tautan Cepat -->
-                <div>
+                <!-- Kolom 2: Tautan Cepat --><div>
                     <h4 class="text-lg font-semibold text-white mb-4">Navigasi</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a href="#tentang" class="hover:text-white transition duration-300">Tentang Kami</a></li>
@@ -425,30 +521,27 @@
                         <li><a href="#blog" class="hover:text-white transition duration-300">Blog</a></li>
                     </ul>
                 </div>
-                <!-- Kolom 3: Legal -->
-                <div>
+                <!-- Kolom 3: Legal --><div>
                     <h4 class="text-lg font-semibold text-white mb-4">Legal</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a href="#" class="hover:text-white transition duration-300">Kebijakan Privasi</a></li>
                         <li><a href="#" class="hover:text-white transition duration-300">Syarat & Ketentuan</a></li>
                     </ul>
                 </div>
-                <!-- Kolom 4: Media Sosial -->
-                <div>
+                <!-- Kolom 4: Media Sosial --><div>
                     <h4 class="text-lg font-semibold text-white mb-4">Ikuti Kami</h4>
                     <div class="flex space-x-4">
-                        <a href="#" aria-label="LinkedIn" class="hover:text-white transition duration-300">
+                        <a href="#" aria-label="LinkedIn" class="hover:text-pacific-500 transition duration-300">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
 	                    </a>
-                        <a href="#" aria-label="Twitter" class="hover:text-white transition duration-300">
+                        <a href="#" aria-label="Twitter" class="hover:text-pacific-500 transition duration-300">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-.422.724-.664 1.565-.664 2.458 0 1.945 1.056 3.636 2.628 4.633-.949-.03-1.816-.29-2.55-.693v.064c0 2.705 1.921 4.975 4.45 5.49-.466.128-.96.196-1.465.196-.35 0-.691-.034-1.022-.098.71 2.218 2.76 3.84 5.187 3.884-1.907 1.493-4.301 2.383-6.912 2.383-.44 0-.874-.026-1.3-.076 2.465 1.579 5.397 2.5 8.5 2.5 10.2 0 15.776-8.46 15.776-15.777 0-.24-.005-.478-.015-.714.947-.684 1.77-1.536 2.423-2.513z"/></svg>
                         </a>
                     </div>
                 </div>
             </div>
             
-            <!-- Copyright -->
-            <div class="mt-12 pt-8 border-t border-gray-700 text-center text-sm">
+            <!-- Copyright --><div class="mt-12 pt-8 border-t border-gray-700 text-center text-sm">
                 &copy; <span id="current-year"></span> Amaranggana Group. Seluruh hak cipta dilindungi.
             </div>
         </div>
@@ -456,112 +549,138 @@
 
     <script>
         // =================================================================
-        // --- OpenAI API Setup ---
-        // PENTING: GANTI DENGAN KUNCI API OPENAI SAH ANDA
-        const API_URL = "https://api.openai.com/v1/chat/completions";
-        // <<< GANTI DENGAN KUNCI API OPENAI SAH ANDA DI SINI >>>
-        const API_KEY = "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"; 
-        // PERINGATAN! Jika Anda terus mendapat error 429, periksa status Kunci API ini 
-        // di dasbor OpenAI (saldo, batas rate, dan validitas kunci).
-        const MODEL_NAME = "gpt-3.5-turbo";
+        // --- Gemini API Setup ---
+        // PENTING: GANTI DENGAN KUNCI API GEMINI SAH ANDA
+        const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent";
+        // <<< GANTI DENGAN KUNCI API GEMINI SAH ANDA DI SINI >>>
+        const API_KEY = ""; // Kunci API harus diisi agar fitur AI berfungsi.
         // =================================================================
 
+        // Skema JSON untuk Analisis Strategis (Gemini)
+        const strategicAnalysisSchema = {
+            type: "OBJECT",
+            properties: {
+                "recommendation": {
+                    "type": "STRING",
+                    "description": "Layanan yang direkomendasikan (Pengembangan Fintech, Keamanan Siber & Kepatuhan, atau Konsultasi Strategi Digital)."
+                },
+                "justification": {
+                    "type": "STRING",
+                    "description": "Penjelasan ringkas mengapa layanan ini cocok."
+                },
+                "suggested_actions": {
+                    "type": "ARRAY",
+                    "items": { 
+                        "type": "STRING",
+                        "description": "Langkah aksi spesifik (2-3 poin)."
+                    }
+                }
+            },
+            required: ["recommendation", "justification", "suggested_actions"]
+        };
 
+
+        // =================================================================
+        // --- Gemini Core Functions (Text Generation) ---
+        // =================================================================
         /**
-         * Utility function to fetch content from the OpenAI API with aggressive exponential backoff.
-         * Telah ditingkatkan ketahanannya terhadap error 429 (Too Many Requests).
+         * Utility function to fetch content from the Gemini API with exponential backoff.
          * @param {string} userQuery - The user's prompt.
          * @param {string} systemPrompt - The system instruction/persona.
-         * @param {boolean} isStructured - Whether to request JSON output.
+         * @param {boolean} useGrounding - Whether to use Google Search grounding (untuk Blog).
+         * @param {object|null} schema - The JSON schema (untuk Analisis).
          * @returns {Promise<string>} The generated text content (either plain text or JSON string).
          */
-        async function fetchOpenAIText({ userQuery, systemPrompt, isStructured = false }) {
-            const maxRetries = 4; 
+        async function fetchGeminiText({ userQuery, systemPrompt, useGrounding = false, schema = null }) {
+            const maxRetries = 3;
             
-            // --- Memastikan Kunci API tidak kosong ---
             if (!API_KEY || API_KEY.trim() === "") {
-                console.error("Kunci API OpenAI kosong. Fitur AI tidak akan berfungsi.");
-                throw new Error("Kesalahan Konfigurasi: Harap masukkan Kunci API OpenAI yang valid.");
+                console.error("Kunci API Gemini kosong. Fitur AI mungkin tidak berfungsi.");
             }
-            // -----------------------------------------------------------
+
+            const fullApiUrl = `${API_URL}?key=${API_KEY}`;
 
             for (let i = 0; i < maxRetries; i++) {
                 try {
-                    
                     const payload = {
-                        model: MODEL_NAME,
-                        messages: [
-                            { role: "system", content: systemPrompt },
-                            { role: "user", content: userQuery }
-                        ]
+                        contents: [{ parts: [{ text: userQuery }] }],
+                        systemInstruction: {
+                            parts: [{ text: systemPrompt }]
+                        },
+                        generationConfig: {},
+                        tools: []
                     };
                     
-                    // Konfigurasi untuk JSON Output (OpenAI)
-                    if (isStructured) {
-                        payload.response_format = { type: "json_object" };
+                    if (useGrounding) {
+                        payload.tools.push({ "google_search": {} });
                     }
                     
-                    const response = await fetch(API_URL, {
+                    if (schema) {
+                        payload.generationConfig.responseMimeType = "application/json";
+                        payload.generationConfig.responseSchema = schema;
+                    }
+                    
+                    const response = await fetch(fullApiUrl, {
                         method: 'POST',
-                        headers: { 
-                            'Content-Type': 'application/json',
-                            // Menggunakan Authorization Header untuk OpenAI
-                            'Authorization': `Bearer ${API_KEY}`
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
 
-                    if (response.status === 429) {
-                        // Jika bukan percobaan terakhir, tunggu dan coba lagi
+                    if (response.status === 429) { 
                         if (i < maxRetries - 1) {
-                            // Exponential backoff: 3s, 4.5s, 6.75s, 10.1s
-                            const delay = 3000 * Math.pow(1.5, i);
-                            const delaySeconds = (delay / 1000).toFixed(2);
-                            console.warn(`[API] Rate limit hit (429). Retrying in ${delaySeconds} seconds...`);
+                            const delay = Math.pow(2, i) * 1000;
+                            console.warn(`[API] Rate limit (429). Mencoba lagi dalam ${delay}ms...`);
                             await new Promise(resolve => setTimeout(resolve, delay));
-                            continue; // Retry
+                            continue;
                         } else {
-                            // Jika ini percobaan terakhir, lempar error
                             throw new Error("Terlalu banyak permintaan (429). Silakan coba lagi nanti.");
                         }
                     }
 
                     if (!response.ok) {
                         const errorBody = await response.json();
-                        // Menangani kesalahan autentikasi (401)
-                        if (response.status === 401) {
-                             throw new Error("Kesalahan Otentikasi (401). Kunci API Anda mungkin tidak valid atau tidak memiliki izin.");
+                        if (response.status === 400 || response.status === 401) {
+                             throw new Error(`Kesalahan Otentikasi (${response.status}). Kunci API Anda mungkin tidak valid atau tidak memiliki izin.`);
                         }
                         throw new Error(errorBody.error?.message || `Kesalahan API: ${response.statusText}`);
                     }
 
                     const result = await response.json();
-                    const text = result.choices?.[0]?.message?.content;
-
-                    if (!text) {
-                        throw new Error("Struktur respons tidak valid atau konten diblokir.");
+                    
+                    if (!result.candidates || !result.candidates[0] || !result.candidates[0].content || !result.candidates[0].content.parts[0]) {
+                        if (result.candidates && result.candidates[0] && result.candidates[0].finishReason === 'SAFETY') {
+                             throw new Error("Permintaan diblokir karena alasan keamanan konten.");
+                        }
+                        throw new Error("Struktur respons tidak valid atau konten kosong.");
                     }
 
-                    return text;
+                    return result.candidates[0].content.parts[0].text;
 
                 } catch (error) {
-                    console.error("OpenAI API call failed:", error.message);
+                    console.error("Gemini API call failed:", error.message);
                     if (i === maxRetries - 1) {
-                        // Jika ini adalah loop terakhir, lempar error untuk ditangani oleh caller function
                         throw error;
                     }
-                    // Untuk error non-429 sementara, tunggu 1s, 2s, 3s
-                    if (i < maxRetries - 1) {
-                         const delay = 1000 * (i + 1);
-                         await new Promise(resolve => setTimeout(resolve, delay));
-                    }
+                    // Exponential backoff delay before retry
+                    await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1))); 
                 }
             }
         }
         
         document.addEventListener('DOMContentLoaded', function() {
-            
-            // --- Fungsionalitas Menu Mobile & Navigasi Aktif (Logic LAMA) ---
+            // --- Fungsionalitas Landing Screen ---
+            const landingScreen = document.getElementById('landing-screen');
+            // Menunda hilangnya landing screen untuk beberapa detik
+            setTimeout(() => {
+                landingScreen.classList.add('hidden-screen');
+                // Pastikan landing screen benar-benar hilang dari DOM setelah transisi
+                landingScreen.addEventListener('transitionend', () => {
+                    landingScreen.remove();
+                }, { once: true });
+            }, 3000); // Tampilkan selama 3 detik
+
+
+            // --- Fungsionalitas Menu Mobile & Navigasi Aktif ---
             const menuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const sections = document.querySelectorAll('section[id]');
@@ -603,7 +722,7 @@
             });
 
 
-            // --- Fungsionalitas Animasi Saat Menggulir (Logic LAMA) ---
+            // --- Fungsionalitas Animasi Saat Menggulir ---
             const animatedElements = document.querySelectorAll('.animate-on-scroll');
             
             const animationObserver = new IntersectionObserver((entries, observer) => {
@@ -619,7 +738,7 @@
                 animationObserver.observe(el);
             });
 
-            // --- Fungsionalitas Animasi Umpan Balik Formulir (Logic LAMA) ---
+            // --- Fungsionalitas Animasi Umpan Balik Formulir ---
             const contactForm = document.getElementById('contact-form');
             const successMessage = document.getElementById('form-success-message');
             
@@ -632,11 +751,71 @@
                 }, 5000);
             });
 
-            // --- Update Tahun Copyright (Logic LAMA) ---
+            // --- Update Tahun Copyright ---
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
+            
             // =================================================================
-            // --- OpenAI FEATURE 1: Blog Content Idea Generator ---
+            // --- GEMINI FEATURE 3: Fintech Terminology Explainer (TEXT ONLY) ---
+            // =================================================================
+            const termInput = document.getElementById('term-input');
+            const explainButton = document.getElementById('explain-term-button');
+            const explainButtonText = document.getElementById('explain-button-text');
+            const explainSpinner = document.getElementById('explain-spinner');
+            const termResults = document.getElementById('term-results');
+            const termExplanation = document.getElementById('term-explanation');
+
+            // Button state check
+            if (termInput.value.trim() !== '') {
+                explainButton.removeAttribute('disabled');
+            }
+            termInput.addEventListener('input', () => {
+                if (termInput.value.trim() !== '') {
+                    explainButton.removeAttribute('disabled');
+                } else {
+                    explainButton.setAttribute('disabled', 'true');
+                }
+                termResults.classList.add('hidden');
+            });
+            
+            explainButton.addEventListener('click', async () => {
+                const term = termInput.value.trim();
+                if (!term) return;
+
+                // UI Loading State
+                explainButton.setAttribute('disabled', 'true');
+                explainButtonText.textContent = 'Memproses...';
+                explainSpinner.classList.remove('hidden');
+                termResults.classList.remove('hidden');
+                termExplanation.innerHTML = `<div class="p-2 text-center text-pacific-500">Menganalisis dan membuat penjelasan...</div>`;
+                
+                try {
+                    // Generate Text Explanation 
+                    const textSystemPrompt = "Anda adalah seorang pakar terminologi Fintech. Jelaskan istilah yang diberikan dalam satu paragraf (maksimal 50 kata) secara ringkas, profesional, dan mudah dipahami. Gunakan bahasa Indonesia.";
+                    const textUserQuery = `Jelaskan istilah Fintech: "${term}"`;
+                    
+                    const explanationText = await fetchGeminiText({ 
+                        userQuery: textUserQuery, 
+                        systemPrompt: textSystemPrompt,
+                        useGrounding: false
+                    });
+                    
+                    termExplanation.textContent = explanationText;
+
+                } catch (error) {
+                    console.error("Error generating term explanation:", error);
+                    termExplanation.innerHTML = `<div class="p-2 text-center text-red-500">Terjadi kesalahan: ${error.message}.</div>`;
+                } finally {
+                    // UI Reset State
+                    explainButton.removeAttribute('disabled');
+                    explainButtonText.textContent = 'Jelaskan Istilah';
+                    explainSpinner.classList.add('hidden');
+                }
+            });
+
+
+            // =================================================================
+            // --- GEMINI FEATURE 1: Blog Content Idea Generator ---
             // =================================================================
             const blogInput = document.getElementById('blog-topic-input');
             const generateButton = document.getElementById('generate-blog-ideas');
@@ -664,39 +843,39 @@
                 generateButton.setAttribute('disabled', 'true');
                 blogButtonText.textContent = 'Memproses...';
                 blogSpinner.classList.remove('hidden');
-                blogResults.innerHTML = `<div class="p-4 text-center text-indigo-500">Menganalisis dan membuat ide konten...</div>`;
+                blogResults.innerHTML = `<div class="p-4 text-center text-pacific-500">Menganalisis dan membuat ide konten...</div>`;
                 
                 try {
-                    const systemPrompt = "Anda adalah seorang ahli strategi konten dan SEO di bidang teknologi dan keuangan (Fintech). Tugas Anda adalah menghasilkan 3 ide judul blog yang sangat menarik dan relevan berdasarkan topik yang diberikan. Sertakan deskripsi singkat (maksimal 20 kata) untuk setiap ide. Format output Anda sebagai daftar berurutan dalam bahasa Indonesia.";
+                    const systemPrompt = "Anda adalah seorang ahli strategi konten dan SEO di bidang teknologi dan keuangan (Fintech). Tugas Anda adalah menghasilkan 3 ide judul blog yang sangat menarik dan relevan berdasarkan topik yang diberikan. Gunakan Google Search untuk memastikan ide relevan dengan tren terbaru. Sertakan deskripsi singkat (maksimal 20 kata) untuk setiap ide. Format output Anda sebagai daftar berurutan dalam bahasa Indonesia.";
                     const userQuery = `Buatkan 3 ide konten blog yang menarik untuk topik: "${topic}". Pastikan ide-ide ini relevan dengan tren pasar saat ini.`;
                     
-                    const rawText = await fetchOpenAIText({ 
+                    const rawText = await fetchGeminiText({ 
                         userQuery: userQuery, 
-                        systemPrompt: systemPrompt
-                        // isStructured: false (default)
+                        systemPrompt: systemPrompt,
+                        useGrounding: true
                     });
 
                     // Parse and display results
                     const htmlContent = rawText
                         .split('\n')
                         .map(line => {
-                            // Mencari baris yang dimulai dengan angka dan titik (misal: "1. Judul...")
                             const match = line.match(/^(\d+)\.\s*(.*)/);
                             if (match) { 
                                 const num = match[1];
                                 const fullTitleDesc = match[2];
                                 
-                                // Mencoba memisahkan judul dan deskripsi jika ada titik dua
+                                // Split title and description if a colon is present
                                 const parts = fullTitleDesc.split(':');
                                 const title = parts[0].trim();
+                                // Join remaining parts in case description contains colons
                                 const description = parts.length > 1 ? parts.slice(1).join(':').trim() : "Deskripsi singkat tidak tersedia.";
 
-                                return `<div class="p-4 bg-white rounded-lg border-l-4 border-indigo-500 shadow-md">
+                                return `<div class="p-4 bg-white rounded-lg border-l-4 border-pacific-500 shadow-md">
                                             <h5 class="font-bold text-gray-900">${num}. ${title}</h5>
                                             <p class="mt-1 text-sm text-gray-600">${description}</p>
                                         </div>`;
                             }
-                            return ''; // Abaikan baris non-daftar
+                            return '';
                         })
                         .filter(html => html.length > 0)
                         .join('');
@@ -716,7 +895,7 @@
 
 
             // =================================================================
-            // --- OpenAI FEATURE 2: Strategic Challenge Analysis ---
+            // --- GEMINI FEATURE 2: Strategic Challenge Analysis ---
             // =================================================================
             const challengeInput = document.getElementById('challenge-input');
             const analyzeButton = document.getElementById('analyze-challenge');
@@ -746,37 +925,37 @@
                 analysisButtonText.textContent = 'Menganalisis...';
                 analysisSpinner.classList.remove('hidden');
                 analysisResults.classList.remove('hidden');
-                analysisContent.innerHTML = `<div class="p-4 text-center text-indigo-500">AI sedang memproses tantangan bisnis Anda...</div>`;
+                analysisContent.innerHTML = `<div class="p-4 text-center text-pacific-500">AI sedang memproses tantangan bisnis Anda...</div>`;
 
                 try {
                     const systemPrompt = "Anda adalah Analis Strategis Utama untuk Amaranggana Group, sebuah perusahaan Teknologi dan Keuangan. Tugas Anda adalah menganalisis tantangan bisnis yang diberikan oleh klien dan merekomendasikan satu layanan inti Amaranggana Group yang paling relevan. Layanan inti adalah: Pengembangan Fintech, Keamanan Siber & Kepatuhan, dan Konsultasi Strategi Digital. Anda harus memberikan output JSON yang ringkas dan valid, mematuhi skema yang diberikan. Gunakan bahasa Indonesia.";
                     const userQuery = `Analisis tantangan bisnis berikut dan rekomendasikan layanan Amaranggana Group yang paling cocok:\n\nTantangan: ${challenge}`;
                     
-                    const rawJsonText = await fetchOpenAIText({ 
+                    const rawJsonText = await fetchGeminiText({ 
                         userQuery: userQuery, 
                         systemPrompt: systemPrompt,
-                        isStructured: true // Meminta output JSON
+                        schema: strategicAnalysisSchema 
                     });
 
                     const result = JSON.parse(rawJsonText);
                     
                     // Highlight the recommended service card (Micro-interaction)
-                    document.querySelectorAll('#layanan [id^="layanan-"]').forEach(card => card.classList.remove('ring-4', 'ring-indigo-300', 'scale-105'));
+                    document.querySelectorAll('#layanan [id^="layanan-"]').forEach(card => card.classList.remove('ring-4', 'ring-pacific-500', 'scale-105'));
                     if (result.recommendation.toLowerCase().includes('fintech')) {
-                        document.getElementById('layanan-fintech').classList.add('ring-4', 'ring-indigo-300', 'scale-105');
+                        document.getElementById('layanan-fintech').classList.add('ring-4', 'ring-pacific-500', 'scale-105');
                     } else if (result.recommendation.toLowerCase().includes('keamanan')) {
-                        document.getElementById('layanan-keamanan').classList.add('ring-4', 'ring-indigo-300', 'scale-105');
+                        document.getElementById('layanan-keamanan').classList.add('ring-4', 'ring-pacific-500', 'scale-105');
                     } else if (result.recommendation.toLowerCase().includes('strategi')) {
-                         document.getElementById('layanan-konsultasi').classList.add('ring-4', 'ring-indigo-300', 'scale-105');
+                         document.getElementById('layanan-konsultasi').classList.add('ring-4', 'ring-pacific-500', 'scale-105');
                     }
 
                     // Render the results
                     const actionsHtml = (result.suggested_actions || []).map(action => 
-                        `<li class="flex items-start"><svg class="w-5 h-5 mr-2 text-indigo-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>${action}</li>`
+                        `<li class="flex items-start"><svg class="w-5 h-5 mr-2 text-pacific-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>${action}</li>`
                     ).join('');
 
                     analysisContent.innerHTML = `
-                        <p class="mb-3 text-lg font-bold text-indigo-600">Layanan Rekomendasi: ${result.recommendation || 'Tidak Teridentifikasi'}</p>
+                        <p class="mb-3 text-lg font-bold text-pacific-600">Layanan Rekomendasi: ${result.recommendation || 'Tidak Teridentifikasi'}</p>
                         <p class="text-gray-700 mb-4">${result.justification || 'Penjelasan tidak tersedia.'}</p>
                         <h5 class="font-semibold text-gray-800 mb-2">Langkah Aksi yang Disarankan:</h5>
                         <ul class="space-y-2 text-gray-600 list-none pl-0">${actionsHtml}</ul>
@@ -785,7 +964,7 @@
 
                 } catch (error) {
                     console.error("Error analyzing challenge:", error);
-                    analysisContent.innerHTML = `<div class="p-4 text-center text-red-500">Terjadi kesalahan dalam analisis: ${error.message}. Harap periksa Kunci API OpenAI Anda.</div>`;
+                    analysisContent.innerHTML = `<div class="p-4 text-center text-red-500">Terjadi kesalahan dalam analisis: ${error.message}. Harap periksa Kunci API Gemini Anda.</div>`;
                 } finally {
                     // UI Reset State
                     analyzeButton.removeAttribute('disabled');
@@ -797,3 +976,4 @@
     </script>
 </body>
 </html>
+
