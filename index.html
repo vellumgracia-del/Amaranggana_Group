@@ -6,6 +6,9 @@
     <title>Amaranggana Group - Inovasi Teknologi & Keuangan</title>
     <meta name="description" content="Amaranggana Group - Mendorong inovasi di bidang teknologi dan keuangan melalui solusi strategis dan pengembangan perangkat lunak terdepan.">
     
+    <!-- Memuat Three.js (Untuk Animasi 3D) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
     <!-- Memuat Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Konfigurasi Warna Kustom Tailwind --><script>
@@ -34,40 +37,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* Menggunakan font Inter sebagai default */
+        /* ... CSS yang sudah ada ... */
         body {
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden; /* Mencegah overflow horizontal */
+            overflow-x: hidden;
         }
-
-        /* Kelas untuk Navigasi Aktif */
-        .nav-active {
-            color: #1CA9C9; /* Pacific Blue */
-            font-weight: 600;
-        }
-        
-        /* Persiapan untuk Animasi Scroll */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        /* Kelas yang ditambahkan JavaScript saat elemen terlihat */
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Menghormati preferensi pengguna untuk mengurangi gerakan */
+        .nav-active { color: #1CA9C9; font-weight: 600; }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
         @media (prefers-reduced-motion: reduce) {
-            .animate-on-scroll {
-                transition: none;
-                opacity: 1;
-                transform: none;
-            }
+            .animate-on-scroll { transition: none; opacity: 1; transform: none; }
         }
 
         /* ======================================= */
@@ -80,11 +61,11 @@
             width: 100%;
             height: 100%;
             background-color: #003153; /* Prussian Blue */
-            display: flex;
+            display: flex; /* Tetap menggunakan flex untuk teks */
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1000; /* Pastikan di atas semua elemen */
+            z-index: 1000;
             transition: opacity 1s ease-out, visibility 1s ease-out;
             color: white;
             opacity: 1;
@@ -96,59 +77,33 @@
             visibility: hidden;
         }
 
-        .animated-logo-container {
-            width: 150px;
-            height: 150px;
-            position: relative;
-            animation: pulsate 2s infinite ease-in-out;
-            transform: scale(1);
-        }
-        
-        .animated-logo-container svg {
+        /* Canvas untuk Three.js */
+        #three-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
+            z-index: 1010; /* Di bawah teks, di atas background */
         }
-
-        /* Keyframes untuk animasi denyut */
-        @keyframes pulsate {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.9; }
-        }
-
-        /* Animasi garis yang bergerak */
-        .logo-line {
-            stroke-dasharray: 200;
-            stroke-dashoffset: 0;
-            animation: drawLine 4s infinite linear;
-        }
-
-        @keyframes drawLine {
-            0% {
-                stroke-dashoffset: 200;
-                transform: rotate(0deg);
-            }
-            50% {
-                stroke-dashoffset: 0;
-                transform: rotate(180deg);
-            }
-            100% {
-                stroke-dashoffset: -200;
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Animasi teks 'Loading...' */
+        
+        /* Teks 'Loading...' */
         .loading-text {
             font-size: 1.25rem; /* text-xl */
             margin-top: 1.5rem; /* mt-6 */
             animation: fadeInOut 2s infinite ease-in-out;
             color: #BFEFF7; /* pacific-100 */
+            z-index: 1020; /* Pastikan teks di atas canvas */
+            position: relative; /* Diperlukan agar z-index berfungsi */
         }
 
         @keyframes fadeInOut {
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
         }
+
+        /* Hapus animasi SVG yang lama */
+        /* Keyframes pulsate dan drawLine tidak lagi digunakan */
 
         /* ======================================= */
         /* END: Landing Screen Specific Styles */
@@ -157,28 +112,13 @@
 </head>
 <body class="bg-neutral-light text-gray-800">
     <!-- 
-      LANDING SCREEN DENGAN ANIMASI
-    --><div id="landing-screen" class="flex flex-col items-center justify-center">
-        <div class="animated-logo-container">
-            <!-- Contoh logo abstrak perpaduan teknologi dan keuangan --><!-- Lingkaran luar (melambangkan stabilitas/data flow) --><!-- Garis bergerigi/sirkuit (teknologi) --><!-- Panah ke atas (pertumbuhan keuangan) --><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Lingkaran luar - Prussian Blue --><circle cx="50" cy="50" r="45" stroke="#0A4A50" stroke-width="2" />
-                
-                <!-- Garis spiral/data flow yang bergerak - Pacific Blue 500 --><path class="logo-line" 
-                      d="M50 5 C75 5 95 25 95 50 C95 75 75 95 50 95 C25 95 5 75 5 50 C5 25 25 5 50 5" 
-                      stroke="#1CA9C9" stroke-width="3" fill="none" transform-origin="50 50">
-                    <animateTransform 
-                        attributeName="transform"
-                        attributeType="XML"
-                        type="rotate"
-                        from="0 50 50"
-                        to="360 50 50"
-                        dur="10s"
-                        repeatCount="indefinite"/>
-                </path>
-
-                <!-- Icon di tengah: Segitiga ke atas (pertumbuhan) di dalam sebuah chip/gear --><g transform="translate(35, 35)" fill="#BFEFF7"> <!-- Pacific Blue 100 --><!-- Bentuk dasar chip/gear --><rect x="5" y="5" width="20" height="20" rx="3" fill="#003153"/> <!-- Prussian Blue --><circle cx="15" cy="15" r="8" fill="#1CA9C9"/> <!-- Pacific Blue 500 --><!-- Segitiga pertumbuhan --><path d="M15 10 L20 20 L10 20 Z" fill="#E6F8FB"/> <!-- Pacific Blue 50 --></g>
-            </svg>
-        </div>
+      LANDING SCREEN DENGAN ANIMASI 3D
+    -->
+    <div id="landing-screen">
+        <!-- Canvas untuk rendering Three.js -->
+        <canvas id="three-canvas"></canvas>
+        
+        <!-- Teks Loading -->
         <p class="loading-text">Memuat pengalaman inovasi...</p>
     </div>
 
@@ -666,15 +606,131 @@
                 }
             }
         }
+
+        // =================================================================
+        // --- LOGIKA APLIKASI UTAMA ---
+        // =================================================================
         
         document.addEventListener('DOMContentLoaded', function() {
+            
             // --- Fungsionalitas Landing Screen ---
             const landingScreen = document.getElementById('landing-screen');
-            // Menunda hilangnya landing screen untuk beberapa detik
+            let animationFrameId; // Untuk menyimpan ID frame animasi
+
+            // --- Mulai Logika Three.js ---
+            let scene, camera, renderer, points;
+            let mouseX = 0, mouseY = 0;
+            // Target untuk pergerakan mouse yang lebih mulus
+            let targetMouseX = 0, targetMouseY = 0;
+            const windowHalfX = window.innerWidth / 2;
+            const windowHalfY = window.innerHeight / 2;
+
+            function initThree() {
+                try {
+                    const canvas = document.getElementById('three-canvas');
+                    if (!canvas) {
+                        console.error("Canvas #three-canvas tidak ditemukan.");
+                        return;
+                    }
+                    
+                    // 1. Scene
+                    scene = new THREE.Scene();
+
+                    // 2. Camera
+                    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                    camera.position.z = 25;
+
+                    // 3. Renderer
+                    renderer = new THREE.WebGLRenderer({ 
+                        canvas: canvas,
+                        antialias: true 
+                    });
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                    renderer.setClearColor(0x003153, 1); // Latar belakang Prussian Blue
+
+                    // 4. Objek (Torus Knot Point Cloud)
+                    const geometry = new THREE.TorusKnotGeometry(10, 3, 128, 20); // Geometri yang lebih kompleks
+                    const material = new THREE.PointsMaterial({
+                        color: 0x1CA9C9, // Pacific Blue
+                        size: 0.1,      // Ukuran titik
+                        sizeAttenuation: true
+                    });
+                    points = new THREE.Points(geometry, material);
+                    scene.add(points);
+
+                    // 5. Event Listeners
+                    document.addEventListener('mousemove', onMouseMove, false);
+                    window.addEventListener('resize', onWindowResize, false);
+                    
+                    // Mulai animasi
+                    animateThree();
+
+                } catch (e) {
+                    console.error("Gagal menginisialisasi Three.js:", e);
+                    // Sembunyikan canvas jika gagal
+                    const canvas = document.getElementById('three-canvas');
+                    if(canvas) canvas.style.display = 'none';
+                }
+            }
+
+            function animateThree() {
+                animationFrameId = requestAnimationFrame(animateThree);
+
+                // Rotasi otomatis
+                points.rotation.x += 0.001;
+                points.rotation.y += 0.002;
+                
+                // Pergerakan mouse yang dimuluskan
+                mouseX += (targetMouseX - mouseX) * 0.05;
+                mouseY += (targetMouseY - mouseY) * 0.05;
+
+                // Terapkan pergerakan mouse ke kamera/scene
+                // Menggerakkan kamera sedikit berdasarkan mouse
+                camera.position.x = mouseX * 0.05;
+                camera.position.y = -mouseY * 0.05;
+                camera.lookAt(scene.position); // Selalu lihat ke tengah
+
+                // Render
+                renderer.render(scene, camera);
+            }
+
+            function onWindowResize() {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+                
+                renderer.setSize(width, height);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            }
+
+            function onMouseMove(event) {
+                // Normalisasi posisi mouse (-0.5 sampai 0.5)
+                targetMouseX = (event.clientX - windowHalfX);
+                targetMouseY = (event.clientY - windowHalfY);
+            }
+
+            // --- Akhir Logika Three.js ---
+
+            // Inisialisasi 3D
+            initThree();
+
+            // Menunda hilangnya landing screen
             setTimeout(() => {
                 landingScreen.classList.add('hidden-screen');
-                // Pastikan landing screen benar-benar hilang dari DOM setelah transisi
+                
                 landingScreen.addEventListener('transitionend', () => {
+                    // Hentikan loop animasi saat layar hilang
+                    if (animationFrameId) {
+                        cancelAnimationFrame(animationFrameId);
+                    }
+                    // Hapus event listener
+                    document.removeEventListener('mousemove', onMouseMove);
+                    window.removeEventListener('resize', onWindowResize);
+                    
+                    // Hapus elemen
                     landingScreen.remove();
                 }, { once: true });
             }, 3000); // Tampilkan selama 3 detik
